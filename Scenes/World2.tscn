@@ -1,0 +1,171 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://sounds/fruit.wav" type="AudioStream" id=1]
+[ext_resource path="res://sounds/ghost.wav" type="AudioStream" id=2]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://sounds/intro.wav" type="AudioStream" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://sounds/death.wav" type="AudioStream" id=6]
+[ext_resource path="res://images/background.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/Ghost.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/joystick.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Gameover.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/fruitPickup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Nav2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/powerUp.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scripts/World2.gd" type="Script" id=15]
+[ext_resource path="res://sounds/chomp.wav" type="AudioStream" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 3 )
+
+[node name="World2" type="Node2D"]
+script = ExtResource( 15 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1080.0
+margin_bottom = 1920.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pos" type="Node2D" parent="."]
+position = Vector2( 180, 300 )
+
+[node name="Nav2" parent="pos" instance=ExtResource( 12 )]
+
+[node name="Player" parent="pos" instance=ExtResource( 13 )]
+position = Vector2( 363.523, 560.479 )
+
+[node name="Ghost" parent="pos" instance=ExtResource( 8 )]
+position = Vector2( 409.766, 272 )
+
+[node name="Ghost2" parent="pos" instance=ExtResource( 8 )]
+position = Vector2( 54.8044, 144.026 )
+
+[node name="Ghost3" parent="pos" instance=ExtResource( 8 )]
+position = Vector2( 561.558, 415.318 )
+
+[node name="Ghost4" parent="pos" instance=ExtResource( 8 )]
+position = Vector2( 49.4334, 178.901 )
+
+[node name="life0" type="Sprite" parent="pos"]
+modulate = Color( 0.972549, 0.866667, 0.164706, 1 )
+position = Vector2( 204, -64 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="life1" type="Sprite" parent="pos"]
+modulate = Color( 0.972549, 0.866667, 0.164706, 1 )
+position = Vector2( 156, -64 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="life2" type="Sprite" parent="pos"]
+modulate = Color( 0.972549, 0.866667, 0.164706, 1 )
+position = Vector2( 108, -64 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="life3" type="Sprite" parent="pos"]
+modulate = Color( 0.972549, 0.866667, 0.164706, 1 )
+position = Vector2( 60, -64 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="life4" type="Sprite" parent="pos"]
+modulate = Color( 0.972549, 0.866667, 0.164706, 1 )
+position = Vector2( 12, -64 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="pickUp" parent="pos" instance=ExtResource( 14 )]
+position = Vector2( 50.9219, 506.138 )
+
+[node name="pickUp2" parent="pos" instance=ExtResource( 14 )]
+position = Vector2( 333.322, 51.1041 )
+
+[node name="pickUp3" parent="pos" instance=ExtResource( 14 )]
+position = Vector2( 429.047, 50.6783 )
+
+[node name="pickUp4" parent="pos" instance=ExtResource( 14 )]
+position = Vector2( 50.1724, 692.031 )
+
+[node name="fruitPickUp" parent="pos" instance=ExtResource( 11 )]
+position = Vector2( 403, 689 )
+
+[node name="joystick" parent="." instance=ExtResource( 9 )]
+position = Vector2( 717.758, 1419.58 )
+
+[node name="deathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Gameover" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="Score" type="Label" parent="."]
+margin_left = 36.7695
+margin_top = 50.9117
+margin_right = 468.77
+margin_bottom = 210.912
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreNumber" type="Label" parent="Score"]
+margin_left = 224.0
+margin_top = 8.0
+margin_right = 408.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0000"
+autowrap = true
+clip_text = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fruitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+
+[node name="PowerupTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="ghostSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="introSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[node name="chompSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[connection signal="body_entered" from="pos/Nav2/follower1/Area2D" to="." method="playerfollower"]
+[connection signal="body_entered" from="pos/Nav2/follower2/Area2D" to="." method="playerfollower"]
+[connection signal="player_hit" from="pos/Ghost" to="." method="player_hit"]
+[connection signal="player_hit" from="pos/Ghost2" to="." method="player_hit"]
+[connection signal="player_hit" from="pos/Ghost3" to="." method="player_hit"]
+[connection signal="player_hit" from="pos/Ghost4" to="." method="player_hit"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[editable path="pos/Nav2"]
+[editable path="pos/Nav2/follower1"]
+[editable path="pos/Nav2/follower2"]
